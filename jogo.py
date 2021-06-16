@@ -20,7 +20,7 @@ pygame.display.set_icon(icone)
 preto = (0,0,0)
 branco = (255,255,255)
 fundo = pygame.image.load("assets/saladeaula1.jpg")
-ator = pygame.image.load("assets/ator.png")
+ator = pygame.image.load("assets/balaoA.png")
 fala = pygame.image.load("assets/fala.png")
 
 #palavras
