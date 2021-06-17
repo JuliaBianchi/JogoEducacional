@@ -20,11 +20,14 @@ pygame.display.set_icon(icone)
 preto = (0,0,0)
 branco = (255,255,255)
 fundo = pygame.image.load("assets/saladeaula1.jpg")
-ator = pygame.image.load("assets/balaoA.png")
+ator = pygame.image.load("assets/ator.png")
 fala = pygame.image.load("assets/fala.png")
+vogalA =  pygame.image.load("assets/balaoA.png")
+vogalE =  pygame.image.load("assets/balaoE.png")
+vogalI =  pygame.image.load("assets/balaoI.png")
+vogalO =  pygame.image.load("assets/balaoO.png")
+vogalU =  pygame.image.load("assets/balaoU.png")
 
-#palavras
-fonte = pygame.font.SysFont("arial", 50, True, False)
 #Pegar a posição do mouse
 x,y = pygame.mouse.get_pos()
 print(x)
@@ -40,13 +43,8 @@ while True:
     
     #config da tela
     display.blit(fundo, (0,0)) #inserir imagem na tela
-    display.blit(ator, (430,150))
-    display.blit(fala, (550,92))
-    palavras = ('Gat_, Ab_lha, Papaga_o, C_chorro, Tartar_ga')
-    texto = fonte.render(palavras, True, (255,255,255))
-    display.blit(texto,(719,255))
-
-
+    display.blit(ator, (200,150))
+    display.blit(fala, (350,50))
     pygame.display.update() 
     fps.tick(60)
 
