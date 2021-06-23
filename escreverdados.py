@@ -1,10 +1,9 @@
 #Informações dos jogadores
 
-def informacoesJogadores(pergunta,pergunta2):
+def informacoesJogadores():
     pergunta = str(input("Informe seu nome: "))
     pergunta2 = str(input("Informe seu e-mail: "))
-
-
+    
     arquivo = open("dados.txt", "a")
-    arquivo.write(pergunta+" " + pergunta2 + "\n")
+    arquivo.write("Nome: "+pergunta+" "+"email: "+pergunta2+"\n")
     arquivo.close()

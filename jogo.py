@@ -4,6 +4,7 @@ import random
 from pygame.locals import *
 from escreverdados import informacoesJogadores
 
+#Armazenar os dados
 informacoesJogadores()
 
 #iniciando o pygame
@@ -25,27 +26,22 @@ preto = (0,0,0)
 branco = (255,255,255)
 
 #Placar de pontos
-
 def escrevendoPlacar(pontos):
     font = pygame.font.SysFont(None, 45)
     texto = font.render("Pontos: "+str(pontos), True, branco)
     display.blit(texto, (800, 200))
-
 def jogo():
     pygame.mixer.music.load("assets/somdefundo.mp3")
     pygame.mixer.music.play(-1)
     fundo = pygame.image.load("assets/saladeaula1.jpg")
     ator = pygame.image.load("assets/ator.png")
     mensagem = pygame.image.load("assets/fala.png")
-
     pontos = 0
     velocidade = 3
     posicaoYbalao = 600
     posicaoXbalao = largura * 0.45
-
     larguraBalao = 90
     alturaBalao = 212
-
     listaPosicao = [random.randrange(50),random.randrange(55,200),random.randrange(300,400),random.randrange(600,700),random.randrange(800,900),random.randrange(1000,1110),random.randrange(100,260)]
     listaVelocidade = [2,1,2,1,2,1,2]
     listaYbaloes = [720,720,720,720,720,720,720]
@@ -66,7 +62,6 @@ def jogo():
             if evento.type == pygame.QUIT:
                 pygame.quit()
                 quit() 
-
             #Pegar a posição do Balão
             if evento.type == MOUSEBUTTONDOWN:
                 x,y = pygame.mouse.get_pos()
@@ -81,9 +76,7 @@ def jogo():
                         posicaoYbalao = 720
                         pygame.mixer.Sound.play(estouroSound)
                         pontos = pontos + 1
-                        
         #fim - verificação de interação com o usuário
-
         #config da tela
         display.blit(fundo, (0,0)) #inserir imagem na tela
         display.blit(ator, (200,150))
@@ -98,15 +91,13 @@ def jogo():
         listaYbaloes[5] = listaYbaloes[5] - listaVelocidade[5]
         listaYbaloes[6] = listaYbaloes[6] - listaVelocidade[6]
         posicaoYbalao = posicaoYbalao - listaVelocidade[3]
-
         if posicaoYbalao <= -200:
             posicaoYbalao = 600
             posicaoXbalao = random.randrange(0, largura-50)
         for i in range(0,7):
             if listaYbaloes [i] <= -200:
                 listaYbaloes[i] = 600
-                listaPosicao[i] = random.randrange(0, largura)
-                
+                listaPosicao[i] = random.randrange(0, largura)   
         display.blit(vogalA, (posicaoXbalao, posicaoYbalao))
         display.blit(vogalE, (listaPosicao[0], listaYbaloes[0]))
         display.blit(vogalI, (listaPosicao[1], listaYbaloes[1]))
@@ -114,11 +105,10 @@ def jogo():
         display.blit(vogalU, (listaPosicao[3], listaYbaloes[3]))
         display.blit(vogalO, (listaPosicao[4], listaYbaloes[4]))
         display.blit(balaoVerde, (listaPosicao[5], listaYbaloes[5]))
-
         escrevendoPlacar(pontos)
         pygame.display.update() 
         fps.tick(60)
-
-
 jogo()
+
+
 
