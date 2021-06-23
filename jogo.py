@@ -2,6 +2,9 @@ import pygame
 import time
 import random
 from pygame.locals import *
+from escreverdados import informacoesJogadores
+
+informacoesJogadores()
 
 #iniciando o pygame
 pygame.init()
@@ -39,8 +42,10 @@ def jogo():
     velocidade = 3
     posicaoYbalao = 600
     posicaoXbalao = largura * 0.45
+
     larguraBalao = 90
     alturaBalao = 212
+
     listaPosicao = [random.randrange(50),random.randrange(55,200),random.randrange(300,400),random.randrange(600,700),random.randrange(800,900),random.randrange(1000,1110),random.randrange(100,260)]
     listaVelocidade = [2,1,2,1,2,1,2]
     listaYbaloes = [720,720,720,720,720,720,720]
@@ -61,6 +66,8 @@ def jogo():
             if evento.type == pygame.QUIT:
                 pygame.quit()
                 quit() 
+
+            #Pegar a posição do Balão
             if evento.type == MOUSEBUTTONDOWN:
                 x,y = pygame.mouse.get_pos()
                 for i in range(0,7):
@@ -107,9 +114,11 @@ def jogo():
         display.blit(vogalU, (listaPosicao[3], listaYbaloes[3]))
         display.blit(vogalO, (listaPosicao[4], listaYbaloes[4]))
         display.blit(balaoVerde, (listaPosicao[5], listaYbaloes[5]))
+
         escrevendoPlacar(pontos)
         pygame.display.update() 
         fps.tick(60)
+
 
 jogo()
 
