@@ -3,29 +3,24 @@ import time
 import random
 from pygame.locals import *
 from escreverdados import informacoesJogadores
-
 #Armazenar os dados
 informacoesJogadores()
-
 #iniciando o pygame
 pygame.init()
-
 #configurando o display
 largura = 1280
 altura = 720
 display = pygame.display.set_mode((largura,altura))
 fps = pygame.time.Clock()
-
 #características do jogo
 pygame.display.set_caption("O Mundo Mágico das Letras")
 icone = pygame.image.load("assets/mestre-dos-magos.jpg")
 pygame.display.set_icon(icone)
-
+erros = 0
 #cores
 preto = (0,0,0)
 branco = (255,255,255)
-erros = 0
-
+vermelho = (255,0,0)
 #Placar de pontos
 def escrevendoPlacar(pontos):
     font = pygame.font.SysFont(None, 45)
@@ -33,14 +28,15 @@ def escrevendoPlacar(pontos):
     texto2 = font.render("Erros: "+str(erros), True, branco)
     display.blit(texto, (800, 200))
     display.blit(texto2, (800, 250))
-
 def gameOver():
     if erros == 5:
-        font = pygame.font.SysFont(None, 45)
-        texto = font.render("Você Perdeu :( "+str(erros)+" erros! ", True, branco)
-        display.blit(texto, (800, 300))
+        font = pygame.font.SysFont(None, 35)
+        texto = font.render("Que pena! Você estourou os balões errados :( ", True, branco)
+        textoerros = font.render(str(erros)+" erros! ", True, vermelho)
+        display.blit(texto, (650, 300))
+        display.blit(textoerros, (850,350))
         pygame.display.update() 
-        time.sleep(3)
+        time.sleep(5)
         pygame.quit()
         quit()
 def jogo():
@@ -61,7 +57,7 @@ def jogo():
     listaVelocidade = [2,1,2,1,2,1,2]
     listaYbaloes = [720,720,720,720,720,720,720]
     estouroSound = pygame.mixer.Sound("assets/estouro.wav")
-
+    erroSound = pygame.mixer.Sound("assets/error.wav")
     #imagens - Balões
     vogalA =  pygame.image.load("assets/a.png")
     vogalE =  pygame.image.load("assets/e.png")
@@ -70,7 +66,6 @@ def jogo():
     vogalU =  pygame.image.load("assets/u.png")
     balaoLaranja = pygame.image.load("assets/balaolaranja.png")
     balaoVerde = pygame.image.load("assets/balaoverde.png")
-
     while True:
         #início - verificação de interação com o usuário
         for evento in pygame.event.get():
@@ -80,35 +75,34 @@ def jogo():
             #Pegar a posição do Balão
             if evento.type == MOUSEBUTTONDOWN:
                 x,y = pygame.mouse.get_pos()
+                #Balões vogais
                 for i in range(0,4):
                     if x >= listaPosicao[i] and x <= listaPosicao[i] +80:
                         if y >= listaYbaloes[i] and y <= listaYbaloes[i]+100:
                             listaYbaloes[i] = 720
                             pygame.mixer.Sound.play(estouroSound)
                             pontos += 1
+                #balões vazios
                 for i in range(4,6):
                     if x >= listaPosicao[i] and x <= listaPosicao[i] +80:
                         if y >= listaYbaloes[i] and y <= listaYbaloes[i]+100:
+                            pygame.mixer.Sound.play(erroSound)
                             listaYbaloes[i] = 720
                             erros = erros + 1
-
+                #Balão vermelho - teste
                 if x >= posicaoXbalao and x <= posicaoXbalao +80:
                     if y >= posicaoYbalao and y <= posicaoYbalao+100:
                         posicaoYbalao = 720
                         pygame.mixer.Sound.play(estouroSound)
                         pontos += 1
         #fim - verificação de interação com o usuário
-
         display.blit(fundo, (0,0)) #inserir imagem na tela
         display.blit(ator, (200,150))
         display.blit(mensagem, (390,50))
         display.blit(logo,(937,420))
-
+        #pontos e erros
         escrevendoPlacar(pontos)
         gameOver()
-
-
-
         #Balões subindo
         listaYbaloes[0] = listaYbaloes[0] - listaVelocidade[0]
         listaYbaloes[1] = listaYbaloes[1] - listaVelocidade[1]
@@ -118,7 +112,6 @@ def jogo():
         listaYbaloes[5] = listaYbaloes[5] - listaVelocidade[5]
         listaYbaloes[6] = listaYbaloes[6] - listaVelocidade[6]
         posicaoYbalao = posicaoYbalao - listaVelocidade[3]
-
         if posicaoYbalao <= -200:
             posicaoYbalao = 600
             posicaoXbalao = random.randrange(0, largura-50)
@@ -126,7 +119,6 @@ def jogo():
             if listaYbaloes [i] <= -200:
                 listaYbaloes[i] = 600
                 listaPosicao[i] = random.randrange(0, largura)   
-
         display.blit(vogalA, (posicaoXbalao, posicaoYbalao))
         display.blit(vogalE, (listaPosicao[0], listaYbaloes[0]))
         display.blit(vogalI, (listaPosicao[1], listaYbaloes[1]))
