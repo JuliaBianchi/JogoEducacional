@@ -1,13 +1,11 @@
-import cx_Freeze
+from cx_Freeze import setup, Executable
 
-executables = [cx_Freeze.Executable (script="jogo.py", icon="assets/mestre.ico")]
-
-cx_Freeze.setup(
-    name="O Mundo Mágico das Letras",
+setup(
+    name="O Mundo Mágico das Letras - Júlia Bianchi",
     options={
         "build_exe": {
-            "packages": ["pygame","random","time"],
+            "packages": ["pygame"],
             "include_files":["assets"]
         }},
-    executables=executables
+    executables= [Executable (script="game.py", icon="assets/mestre.ico")],
 )
