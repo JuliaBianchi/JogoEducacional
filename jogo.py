@@ -26,11 +26,6 @@ preto = (0,0,0)
 branco = (255,255,255)
 erros = 0
 
-#pegas a posição do mouse
-x,y = pygame.mouse.get_pos()
-print(x)
-print(y)
-
 #Placar de pontos
 def escrevendoPlacar(pontos):
     font = pygame.font.SysFont(None, 45)
@@ -48,8 +43,6 @@ def gameOver():
         time.sleep(3)
         pygame.quit()
         quit()
-
-
 def jogo():
     global erros
     pygame.mixer.music.load("assets/somdefundo.mp3")
