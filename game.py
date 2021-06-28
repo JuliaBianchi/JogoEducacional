@@ -50,13 +50,18 @@ def gameOver():
         display.blit(imagemErro, (200,340))
         display.blit(falaErro, (350, 250))
         pygame.display.update() 
-        time.sleep(10)
+        time.sleep(6)
         pygame.quit()
         quit()
 def jogo():
     global erros, pontos
     pygame.mixer.music.load("assets/somdefundo.mp3")
     pygame.mixer.music.play(-1)
+    fundo = pygame.image.load("assets/saladeaula1.jpg")
+    ator = pygame.image.load("assets/ator.png")
+    mensagem = pygame.image.load("assets/fala.png")
+    logo = pygame.image.load("assets/cc.png")
+    pontos = 0
     posicaoYbalao = 600
     posicaoXbalao = largura * 0.45
     listaPosicao = [random.randrange(50),random.randrange(55,200),random.randrange(300,400),random.randrange(600,700),random.randrange(800,900),random.randrange(1000,1110),random.randrange(100,260)]
