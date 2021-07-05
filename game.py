@@ -65,7 +65,7 @@ def jogo():
     posicaoYbalao = 600
     posicaoXbalao = largura * 0.45
     listaPosicao = [random.randrange(50),random.randrange(55,200),random.randrange(300,400),random.randrange(600,700),random.randrange(800,900),random.randrange(1000,1110),random.randrange(100,260)]
-    listaVelocidade = [2,1,2,1,2,1,2]
+    listaVelocidade = [3,2,1,2,3,1,2]
     listaYbaloes = [720,720,720,720,720,720,720]
     estouroSound = pygame.mixer.Sound("assets/estouro.wav")
     erroSound = pygame.mixer.Sound("assets/error.wav")
